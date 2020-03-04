@@ -1,0 +1,8 @@
+branch="$1"
+
+if [[ -z "$branch" ]]; then
+    echo "Cannot checkout to empty branch!"
+    exit 1
+fi
+
+aautils/.ead.sh git checkout "$branch";
