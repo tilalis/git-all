@@ -1,8 +1,0 @@
-params="$@"
-
-if [[ -z "$params" ]]; then
-    echo "Cannot checkout to empty branch!"
-    exit 1
-fi
-
-gitall/.ead.sh git checkout $params;

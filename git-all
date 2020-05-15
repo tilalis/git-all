@@ -1,0 +1,73 @@
+#!/bin/bash
+
+exclude() {
+    directory="$1"
+    excluded_directories_filename="$2"
+
+    if [[ ! -f "$excluded_directories_filename" ]]; then
+        return 1
+    fi
+
+    while read -r excluded_directory
+    do
+        if [[ "$directory" = "${excluded_directory}/" ]] || [[ "$directory" = "$excluded_directory}" ]];
+        then
+            return 0
+        fi
+    done < "$excluded_directories_filename"
+
+    return 1
+}
+
+usage() {
+    echo "git extension to use on multiple repositories in same folder"
+    echo
+    echo "usage:"
+    echo "  git all {git command}"
+}
+
+clone() {
+    echo "Cloning is to be implemented."
+}
+
+main() {
+    BLUE='\033[0;34m'
+    GRAY='\033[0;37m'
+    EC='\033[0m' # end color
+
+    for directory in */
+    do
+        # Exclude .gitallexcluded listed files
+        if exclude "$directory" .gitallexcluded; then
+            continue
+        fi
+
+        # Exclude non-git repositories folders
+        if ! git -C "$directory" rev-parse > /dev/null 2>&1; then
+            continue
+        fi
+
+        cd "$directory" || (echo "Could not change directory!" && exit)
+
+        echo -e "${BLUE}$ ${GRAY}cd${EC} ${directory%/}"
+        echo -e "${BLUE}$ ${GRAY}git${EC} $@"
+        git $@;
+
+        cd ..
+        echo
+    done
+}
+
+case $1 in
+    -h)
+        usage
+        exit 0
+        ;;
+    clone)
+        clone
+        exit 0
+        ;;
+    *)
+        main $@
+        ;;
+esac
