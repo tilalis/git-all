@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Colors for output
+BLUE='\033[0;34m'
+GRAY='\033[0;37m'
+EC='\033[0m' # end color
+
 exclude() {
     directory="$1"
     excluded_directories_filename="$2"
@@ -27,14 +32,27 @@ usage() {
 }
 
 clone() {
-    echo "Cloning is to be implemented."
+    repositories_file_filename="$1"
+
+    if [[ -z "$repositories_file_filename" ]]; then
+        echo "clone requires filename with list of repositories!"
+        exit 1
+    fi
+
+    if [[ ! -f "$repositories_file_filename" ]]; then
+        echo "file ${repositories_file_filename} does not exist!"
+        exit 1
+    fi
+
+    while read -r clone_params
+    do
+        echo -e "${BLUE}$ ${GRAY}git clone${EC} "$clone_params""
+        git clone $clone_params
+        echo
+    done < "$repositories_file_filename"
 }
 
 main() {
-    BLUE='\033[0;34m'
-    GRAY='\033[0;37m'
-    EC='\033[0m' # end color
-
     for directory in */
     do
         # Exclude .gitallexcluded listed files
@@ -64,7 +82,7 @@ case $1 in
         exit 0
         ;;
     clone)
-        clone
+        clone $2
         exit 0
         ;;
     *)
