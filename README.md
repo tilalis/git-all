@@ -1,7 +1,28 @@
 # git all - simple multiple same folder repositories management
 git commands for __all__ repositories located in same folder 
 
-### Examples:
+### Cloning
+The only special thing in `git all` is cloning. 
+In order to clone multiple repositories, you need to provide a file where every line is a valid set of arguments to reglar `git clone`
+
+Let's say you have a file named `repositories.list` with the following content:
+```
+                  https://github.com/stencila/test.git renamedRepo
+                  https://github.com/rtyley/small-test-repo.git
+--branch gh-pages https://github.com/Samreay/WorkshopExample.git
+```
+
+If you execute `git all clone repositories.list`, as a result you will have the following folder structure:
+
+```
+renamedRepo/         # This folder will contain "test" repository, "master" branch
+small-test-repo/     # This folder with contain "small-test-repo" repository, "master" branch
+WorkshoExample       # This folder will contain "WorkshopExample" repository, "gh-pages" branch
+```
+
+### Other Examples:
+
+You can use whatever `git` command you want on multiple git repositories. All you need to do is to prepend it with `all`.
 
 * `git all status` shows git status for all repositories in folder
 
