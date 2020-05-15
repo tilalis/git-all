@@ -20,7 +20,7 @@ git commands for __all__ repositories located in same folder
 
 ### Exclude folders 
 
-Excluded folders should be listed in `.gitallexcluded` file, folder names should have trailing slash symbol `/` 
+Excluded folders should be listed in `.gitallexcluded` file, folder names with or without trailing slash symbol `/` 
 
 ### How To:
 
