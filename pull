@@ -1,1 +1,8 @@
-aautils/.ead.sh git pull origin "$(git rev-parse --abbrev-ref HEAD)"
+params="$@"
+
+if [[ -z "$params" ]]; then
+    # Pulls from current branch
+    aautils/.ead.sh git pull origin "$(git rev-parse --abbrev-ref HEAD)"
+else
+    aautils/.ead.sh git pull $params
+fi

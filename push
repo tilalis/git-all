@@ -1,0 +1,8 @@
+params="$@"
+
+if [[ -z "$params" ]]; then
+    echo "Cannot push to nowhere!"
+    exit 1
+fi
+
+aautils/.ead.sh git push $params

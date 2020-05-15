@@ -1,8 +1,8 @@
-branch="$1"
+params="$@"
 
-if [[ -z "$branch" ]]; then
+if [[ -z "$params" ]]; then
     echo "Cannot checkout to empty branch!"
     exit 1
 fi
 
-aautils/.ead.sh git checkout "$branch";
+aautils/.ead.sh git checkout $params;
