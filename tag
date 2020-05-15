@@ -5,4 +5,4 @@ if [[ -z "$params" ]]; then
     exit 1
 fi
 
-aautils/.ead.sh git tag $params
+gitall/.ead.sh git tag $params

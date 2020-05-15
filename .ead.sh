@@ -18,7 +18,7 @@ for directory in */
 do
   echo ">>> ${directory%/}"
 
-  if exclude "$directory" aautils/.excluded; then
+  if exclude "$directory" gitall/.excluded; then
     printf "Excluded\n\n"
     continue
   fi
