@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 # Colors for output
+YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
 GRAY='\033[0;37m'
 EC='\033[0m' # end color
@@ -53,6 +54,8 @@ clone() {
 }
 
 main() {
+    errors=()
+
     for directory in */
     do
         # Exclude .gitallexcluded listed files
@@ -69,11 +72,23 @@ main() {
 
         echo -e "${BLUE}$ ${GRAY}cd${EC} ${directory%/}"
         echo -e "${BLUE}$ ${GRAY}git${EC} $@"
-        git $@;
+
+        if ! git $@; then
+            errors+=("${directory%/}")
+        fi
 
         cd ..
         echo
     done
+
+    if [[ -n "$errors" ]]; then
+        echo -e "${YELLOW}WARNING! ${GRAY}Non-zero code returned while executing${EC} 'git $@' ${GRAY}in the following repositories:"
+
+        for repository in ${errors[@]}
+        do
+            echo -e "${GRAY}*${EC} $repository"
+        done
+    fi
 }
 
 case $1 in
