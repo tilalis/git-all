@@ -17,7 +17,7 @@ If you execute `git all clone repositories.list`, as a result you will have the 
 ```
 renamedRepo/         # This folder will contain "test" repository, "master" branch
 small-test-repo/     # This folder with contain "small-test-repo" repository, "master" branch
-WorkshoExample       # This folder will contain "WorkshopExample" repository, "gh-pages" branch
+WorkshopExample      # This folder will contain "WorkshopExample" repository, "gh-pages" branch
 ```
 
 ### Other Examples:
@@ -32,7 +32,7 @@ You can use whatever `git` command you want on multiple git repositories. All yo
 * `git all pull` pulls in all repositories from checked out branch
 * `git all pull origin master` pulls in all repositories from remote `origin` and branch `master`
 
-* `git all tag v1` tags all current repositories status to lightwweight tag `v1`
+* `git all tag v1` tags all current repositories status to lightweight tag `v1`
 * `git all tag -a v1 -m "version one"` tags all repos current status to tag v1 with message "version one"
 
 * `git all push origin master` pushed all current repos states to remote `origin` and branch `master` master
@@ -45,7 +45,7 @@ Excluded folders should be listed in `.gitallexcluded` file, folder names with o
 
 ### How To:
 
-* Clone this repo to the folder with all other repositories
+* Clone this reppsitory
 * Mark `git-all` file as executable
 * Put in under your system PATH (move the file itself, or add gitall folder location to PATH) 
     * for Linux you can do: `sudo ln -s $(pwd)/git-all /usr/local/bin/`
