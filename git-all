@@ -88,11 +88,15 @@ main() {
         do
             echo -e "${GRAY}*${EC} $repository"
         done
+
+        exit 1
     fi
+
+    exit 0
 }
 
 case $1 in
-    -h)
+    -h|"")
         usage
         exit 0
         ;;
