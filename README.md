@@ -49,4 +49,5 @@ Excluded folders should be listed in `.gitallexcluded` file, folder names with o
 * Mark `git-all` file as executable
 * Put in under your system PATH (move the file itself, or add gitall folder location to PATH) 
     * for Linux you can do: `sudo ln -s $(pwd)/git-all /usr/local/bin/`
+    * for Windows you can move `git-all` file to `mingw64/bin` folder of your Git installation (for instance `C:\Program Files\Git\mingw64\bin`) 
 * Use: `git all {command} {parameters}`
