@@ -25,10 +25,10 @@ exclude() {
 }
 
 usage() {
-    echo "git extension to use on multiple repositories in same folder"
-    echo
-    echo "usage:"
-    echo "  git all {git command}"
+cat <<HERE
+usage: git all <any git command (i.e. status, pull etc.)> <parameters to that command>  # execute git command in all repositories in current directory  
+   or: git all clone <filename>                                                         # clone all repositories listed in file to current directory
+HERE
 }
 
 clone() {
