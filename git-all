@@ -59,7 +59,7 @@ main() {
     for directory in */
     do
         # Exclude .gitallexcluded listed files
-        if exclude "$directory" .gitallexcluded; then
+        if exclude "$directory" .gitallignore; then
             continue
         fi
 

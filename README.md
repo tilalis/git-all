@@ -41,7 +41,7 @@ You can use whatever `git` command you want on multiple git repositories. All yo
 
 ### Exclude folders 
 
-Excluded folders should be listed in `.gitallexcluded` file, folder names with or without trailing slash symbol `/` 
+Excluded folders should be listed in `.gitallignore` file, folder names with or without trailing slash symbol `/` 
 
 ### How To:
 
