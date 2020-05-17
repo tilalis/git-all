@@ -51,3 +51,6 @@ Excluded folders should be listed in `.gitallexcluded` file, folder names with o
     * for Linux you can do: `sudo ln -s $(pwd)/git-all /usr/local/bin/`
     * for Windows you can move `git-all` file to `mingw64/bin` folder of your Git installation (for instance `C:\Program Files\Git\mingw64\bin`) 
 * Use: `git all {command} {parameters}`
+
+### See Also:
+* [naddeoa/git-bulk](https://github.com/naddeoa/git-bulk)
