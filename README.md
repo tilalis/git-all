@@ -39,11 +39,11 @@ You can use whatever `git` command you want on multiple git repositories. All yo
 * `git all push origin --tags` pushes all tags from all repos
 
 
-### Exclude folders 
+### Ignore repositories
 
-Excluded folders should be listed in `.gitallignore` file, folder names with or without trailing slash symbol `/` 
+Ignored repositories should be listed in `.gitallignore` file, folder names with or without trailing slash symbol `/` 
 
-### How To:
+### How To Intall:
 
 * Clone this reppsitory
 * Mark `git-all` file as executable
@@ -53,4 +53,18 @@ Excluded folders should be listed in `.gitallignore` file, folder names with or 
 * Use: `git all {command} {parameters}`
 
 ### See Also:
+* [tkrajina/git-plus](https://github.com/tkrajina/git-plus) — `multi` in `git-plus` is the closest to what is done by `git all`
 * [naddeoa/git-bulk](https://github.com/naddeoa/git-bulk)
+* [nosarthur/gita](https://github.com/nosarthur/gita)
+* [isacikgoz/gitbatch](https://github.com/isacikgoz/gitbatch)
+* [mu-repo](https://github.com/fabioz/mu-repo/)
+* [myrepos](http://myrepos.branchable.com/)
+
+### How it's different from all of the abovementioned software?
+
+* It's zero-configuration
+* It's written in bash
+* You almost don't need to learn how to use it
+    * Clone a list of repositories from file
+    * Exclude git repositores you don't want to handle with `git-all` in `.gitallignore`
+    * Just add `all` to whatever git command you want to execute on your repositories
