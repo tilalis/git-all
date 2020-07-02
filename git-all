@@ -6,25 +6,6 @@ BLUE='\033[0;34m'
 GRAY='\033[0;37m'
 EC='\033[0m' # end color
 
-exclude() {
-    directory="$1"
-    excluded_directories_filename="$2"
-
-    if [[ ! -f "$excluded_directories_filename" ]]; then
-        return 1
-    fi
-
-    while read -r excluded_directory
-    do
-        if [[ "$directory" = "${excluded_directory}/" ]] || [[ "$directory" = "$excluded_directory}" ]];
-        then
-            return 0
-        fi
-    done < "$excluded_directories_filename"
-
-    return 1
-}
-
 usage() {
 cat <<HERE
 usage: git all <any git command (i.e. status, pull etc.)> <parameters to that command>  # execute git command in all repositories in current directory  
@@ -45,21 +26,41 @@ clone() {
         exit 1
     fi
 
-    while read -r clone_params
-    do
+    while read -r clone_params; do
         echo -e "${BLUE}$ ${GRAY}git clone${EC} "$clone_params""
         git clone $clone_params
         echo
     done < "$repositories_file_filename"
 }
 
+exclude() {
+    directory="$1"
+    
+    # ecluded_directories is a global variable
+    for excluded_directory in "${excluded_directories[@]}"; do
+        if [[ "$directory" = "${excluded_directory}/" ]] || [[ "$directory" = "$excluded_directory}" ]]; then
+            return 0
+        fi
+    done 
+
+    return 1
+}
+
 main() {
+    # Read .gitallignore file
+    excluded_directories=()
+
+    if [[ -f .gitallignore ]]; then
+        while read -r line; do 
+            excluded_directories+=("$line")
+        done < .gitallignore
+    fi
+
     errors=()
 
-    for directory in */
-    do
-        # Exclude .gitallexcluded listed files
-        if exclude "$directory" .gitallignore; then
+    for directory in */; do
+        # Exlude directories from .gitallignore
+        if exclude "$directory"; then
             continue
         fi
 
@@ -84,8 +85,7 @@ main() {
     if [[ -n "$errors" ]]; then
         echo -e "${YELLOW}WARNING! ${GRAY}Non-zero code returned while executing${EC} 'git $@' ${GRAY}in the following repositories:"
 
-        for repository in ${errors[@]}
-        do
+        for repository in ${errors[@]}; do
             echo -e "${GRAY}*${EC} $repository"
         done
 
