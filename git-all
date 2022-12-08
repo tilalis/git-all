@@ -27,7 +27,7 @@ clone() {
         exit 1
     fi
 
-    while read -r clone_params; do
+    while IFS= read -r clone_params || [[ -n "$clone_params" ]]; do
         echo -e "${BLUE}$ ${GRAY}git clone${EC} "$clone_params""
         git clone $clone_params
         echo
