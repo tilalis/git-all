@@ -39,7 +39,10 @@ exclude() {
     
     # ecluded_directories is a global variable
     for excluded_directory in "${excluded_directories[@]}"; do
-        if [[ "$directory" = "${excluded_directory}/" ]] || [[ "$directory" = "$excluded_directory}" ]]; then
+		  # The line below makes it more windows friendly because windows puts fun things at the ends of strings
+		  excluded_directory=`echo $excluded_directory | xargs -0`
+		  # We only need to test once, removing the last slash everywhere
+        if [[ "${directory%/}" == "${excluded_directory%/}" ]]; then
             return 0
         fi
     done 
